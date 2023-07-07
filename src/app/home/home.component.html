@@ -1,0 +1,21 @@
+<h1>Welcome Home!</h1>
+<p>Here are some API calls you can make:</p>
+
+<ul>
+  <li>
+    <button (click)="callAPI('/check-session/')">Check Session</button>
+  </li>
+  <li>
+    <button (click)="callAPI('/user-info/')">User Info</button>
+  </li>
+  <li>
+    <button (click)="callAPI('/setting/playpen/')">Setting Playpen</button>
+  </li>
+  <li>
+    <button (click)="callAPI('/study/')">Study</button>
+  </li>
+</ul>
+
+<ng-template #login>
+  <app-login></app-login>
+</ng-template>
