@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(providerKey: string) {
-    const redirectUri = encodeURIComponent('http://localhost:4200/callback');
+    const redirectUri = encodeURIComponent('http://localhost:4200/' + providerKey + '/callback');
 
     this.authService
       .getLoginUri(providerKey, redirectUri)
