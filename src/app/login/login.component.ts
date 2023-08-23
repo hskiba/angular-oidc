@@ -1,25 +1,35 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../auth.service'; // adjust path
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  providers: { key: string; name: string }[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
+    this.authService.getLoginProviders().subscribe((data) => {
+      this.providers = Object.keys(data).map((key) => ({
+        key,
+        name: data[key],
+      }));
+    });
   }
 
-  login() {
-      this.http.get<{ uri: string }>(`http://127.0.0.1:8000/oauth/vault/login?format=json&redirect_uri=${encodeURIComponent('http://localhost:4200/callback')}`,
-          { withCredentials: true }).subscribe(response => {
-              if (response.uri) {
-                  window.location.href = response.uri;
-              }
-          });
-  }
+  login(providerKey: string) {
+    const redirectUri = encodeURIComponent('http://localhost:4200/callback');
 
+    this.authService
+      .getLoginUri(providerKey, redirectUri)
+      .subscribe((response) => {
+        if (response.uri) {
+          console.log(response.uri);
+          window.location.href = response.uri;
+        }
+      });
+  }
 }

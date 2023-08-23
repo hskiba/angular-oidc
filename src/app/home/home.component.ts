@@ -1,21 +1,35 @@
 import { Component } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  public apiResponse: any; // To hold the JSON response
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   callAPI(endpoint: string) {
-    this.http.get(`http://127.0.0.1:8000${endpoint}`, {
+    return this.http.get(`http://127.0.0.1:8000${endpoint}`, {
       withCredentials: true,
-    }).subscribe(
-      response => console.log(response),
-      error => console.error(error)
+    });
+  }
+
+  handleApiCall(endpoint: string) {
+    this.callAPI(endpoint).subscribe(
+      (response) => (this.apiResponse = response), // Set the response to the apiResponse variable
+      (error) => console.error(error),
     );
-}
+  }
+
+  logout() {
+    this.http
+      .get(`http://127.0.0.1:8000/logout/`, {
+        withCredentials: true,
+        responseType: 'text',
+      })
+      .subscribe(() => window.location.reload());
+  }
 }

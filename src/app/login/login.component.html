@@ -1,1 +1,12 @@
-<button (click)="login()">Login</button>
+<div class="login-container">
+  <h2>Welcome to Our App</h2>
+  <p>Please choose a login method:</p>
+
+  <div class="buttons-container">
+    <div *ngFor="let provider of providers" class="button-wrapper">
+      <button (click)="login(provider.key)" class="login-button">
+        Log in with {{ provider.name }}
+      </button>
+    </div>
+  </div>
+</div>

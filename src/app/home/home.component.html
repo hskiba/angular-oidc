@@ -1,21 +1,28 @@
-<h1>Welcome Home!</h1>
-<p>Here are some API calls you can make:</p>
+<div class="container">
+  <h1>Welcome Home!</h1>
+  <p>Here are some API calls you can make:</p>
 
-<ul>
-  <li>
-    <button (click)="callAPI('/check-session/')">Check Session</button>
-  </li>
-  <li>
-    <button (click)="callAPI('/user-info/')">User Info</button>
-  </li>
-  <li>
-    <button (click)="callAPI('/setting/playpen/')">Setting Playpen</button>
-  </li>
-  <li>
-    <button (click)="callAPI('/study/')">Study</button>
-  </li>
-</ul>
+  <div class="button-group">
+    <button class="api-button" (click)="handleApiCall('/check-session/')">
+      Check Session
+    </button>
+    <button class="api-button" (click)="handleApiCall('/user-info/')">
+      User Info
+    </button>
+    <button class="api-button" (click)="handleApiCall('/setting/playpen/')">
+      Setting Playpen
+    </button>
+    <button class="api-button" (click)="handleApiCall('/study/')">Study</button>
+    <button class="logout-button" (click)="logout()">Logout</button>
+  </div>
 
-<ng-template #login>
-  <app-login></app-login>
-</ng-template>
+  <!-- Displaying JSON response -->
+  <div *ngIf="apiResponse">
+    <h3>API Response:</h3>
+    <pre>{{ apiResponse | json }}</pre>
+  </div>
+
+  <ng-template #login>
+    <app-login></app-login>
+  </ng-template>
+</div>
