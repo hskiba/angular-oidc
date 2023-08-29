@@ -12,7 +12,7 @@ export class HomeComponent {
   constructor(private http: HttpClient) {}
 
   callAPI(endpoint: string) {
-    return this.http.get(`http://127.0.0.1:8000${endpoint}`, {
+    return this.http.get(`http://localhost:8000${endpoint}`, {
       withCredentials: true,
     });
   }
@@ -26,7 +26,7 @@ export class HomeComponent {
 
   logout() {
     this.http
-      .get(`http://127.0.0.1:8000/logout/`, {
+      .get(`http://localhost:8000/logout/`, {
         withCredentials: true,
         responseType: 'text',
       })

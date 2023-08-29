@@ -33,7 +33,7 @@ export class CallbackComponent implements OnInit {
           .set('state', state);
 
         this.http
-          .get('http://127.0.0.1:8000/oauth/' + provider + '/callback', {
+          .get('http://localhost:8000/oauth/' + provider + '/callback', {
             params: queryParams,
             withCredentials: true,
             responseType: 'text', // set the response type as text
